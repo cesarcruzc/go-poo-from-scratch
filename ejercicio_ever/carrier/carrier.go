@@ -1,6 +1,7 @@
 package carrier
 
 import (
+	"errors"
 	"fmt"
 
 	"github.com/cesarcruzc/go-poo-from-scratch/ejercicio_ever/aircraft"
@@ -35,7 +36,7 @@ func (ac *AircraftCarrier) Deploy(t string) (aircraft.Aircraft, error) {
 		}
 	}
 
-	return empty, nil
+	return empty, errors.New("Aircraft Not found")
 }
 
 //AddAircraft method

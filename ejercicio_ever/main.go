@@ -11,6 +11,7 @@ import (
 func main() {
 
 	comms := comms.New()
+
 	carrier := carrier.NewAircraftCarrier(comms)
 
 	f16 := aircraft.NewPlane("f16", "Fighther", "Missil")
