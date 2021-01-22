@@ -18,7 +18,10 @@ func main() {
 
 	// fmt.Printf("%+v", carrier.ListAircrafts())
 
-	a1 := carrier.Deploy("Fighther")
+	a1, err := carrier.Deploy("Fighther")
+	if err != nil {
+		fmt.Printf("Error %s", err)
+	}
 
 	result, err := a1.Attack()
 	if err != nil {

@@ -1,6 +1,8 @@
 package carrier
 
 import (
+	"fmt"
+
 	"github.com/cesarcruzc/go-poo-from-scratch/ejercicio_ever/aircraft"
 	"github.com/cesarcruzc/go-poo-from-scratch/ejercicio_ever/comms"
 )
@@ -19,15 +21,21 @@ func NewAircraftCarrier(comms comms.Comms) *AircraftCarrier {
 }
 
 //Deploy method
-func (ac *AircraftCarrier) Deploy(t string) aircraft.Aircraft {
+func (ac *AircraftCarrier) Deploy(t string) (aircraft.Aircraft, error) {
+	empty := aircraft.NewPlane("empty", "empty", "empty")
+
 	for _, a := range ac.Aircrafts {
 		if a.GetType() == t {
-			ac.comms.Notify(a.GetType())
-			return a
+			err := ac.comms.Notify(a.GetType())
+			if err != nil {
+				fmt.Printf("Error Deploy %s", err)
+				return empty, err
+			}
+			return a, nil
 		}
 	}
 
-	return aircraft.NewPlane("empty", "empty", "empty")
+	return empty, nil
 }
 
 //AddAircraft method
